@@ -5,6 +5,8 @@ import Concerts from './pages/Concerts';
 import Tickets from './pages/Tickets';
 import NotFound from './pages/NotFound';
 import ConcertDetail from './pages/ConcertDetail';
+import Success from './pages/Success';
+
 
 import './App.css'
 
@@ -17,6 +19,7 @@ function App() {
           <Route path="/concerts" element={<Concerts />} />
           <Route path="/concert/:id" element={<ConcertDetail />} />
           <Route path="/tickets" element={<Tickets />} />
+          <Route path="/success" element={<Success />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

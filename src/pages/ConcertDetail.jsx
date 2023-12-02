@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 const ConcertDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate(); // Updated line
   const [concert, setConcert] = useState(null);
   const [formData, setFormData] = useState({ firstName: '', lastName: '' });
 
@@ -28,11 +29,9 @@ const ConcertDetail = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // Find an available (not purchased) ticket
     const availableTicketIndex = concert.tickets.findIndex(ticket => !ticket.purchased);
 
     if (availableTicketIndex !== -1) {
-      // Update the ticket in the database
       const ticketToUpdate = concert.tickets[availableTicketIndex];
       const updatedTicket = {
         ...ticketToUpdate,
@@ -41,7 +40,6 @@ const ConcertDetail = () => {
         last_name: formData.lastName,
       };
 
-      // Update the ticket in the database
       await updateDoc(doc(db, 'concerts', id), {
         tickets: [
           ...concert.tickets.slice(0, availableTicketIndex),
@@ -50,7 +48,6 @@ const ConcertDetail = () => {
         ],
       });
 
-      // Refresh the concert data to reflect the changes
       setConcert((prevConcert) => ({
         ...prevConcert,
         tickets: [
@@ -60,8 +57,10 @@ const ConcertDetail = () => {
         ],
       }));
 
-      // Clear the form data
       setFormData({ firstName: '', lastName: '' });
+
+      // Redirect to /success with ticket information in URL parameters
+      navigate(`/success?id=${id}&ticketID=${updatedTicket.ticketID}&firstName=${formData.firstName}&lastName=${formData.lastName}`);
     } else {
       console.error('No available tickets');
     }

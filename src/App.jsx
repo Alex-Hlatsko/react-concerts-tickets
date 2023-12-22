@@ -7,7 +7,6 @@ import NotFound from './pages/NotFound';
 import ConcertDetail from './pages/ConcertDetail';
 import Success from './pages/Success';
 
-
 import './App.css'
 
 function App() {

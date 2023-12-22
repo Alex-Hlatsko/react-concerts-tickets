@@ -24,8 +24,7 @@ function Concerts() {
 
   return (
     <div>
-      <h2>Concerts Page</h2>
-      <h2>Concerts Page</h2>
+      <h2 className='text-red-500'>Concerts Page</h2>
       {todos && todos.map((concert) => (
         <Concert key={concert.id} concert={concert} />
       ))}

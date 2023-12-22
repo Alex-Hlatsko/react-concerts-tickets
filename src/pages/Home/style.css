@@ -1,0 +1,38 @@
+.heading{
+    text-align: center;
+    padding-top: 6rem;
+}
+.heading h1{
+    font-size: 64px;
+    color: #00ffcc;
+    text-transform: uppercase;
+}
+.heading p{
+    font-size: 18px;
+    margin-bottom: 3rem;
+}
+.heading a{
+    padding: 10px 30px;
+    background-color: #02b38f;
+    font-size: 18px;
+    text-transform: uppercase;
+    border-radius: 0.2rem;
+    transition: 0.3s;
+}
+.heading a:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+@media screen and (max-width: 800px) {
+    .heading{
+        padding: 0 30px;
+        padding-top: 10rem;
+    }
+    .heading h1{
+        font-size: 36px;
+    }
+    .heading p{
+        font-size: 14px;
+    }
+}

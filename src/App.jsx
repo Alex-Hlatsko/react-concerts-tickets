@@ -8,6 +8,7 @@ import ConcertDetail from './pages/ConcertDetail';
 import Success from './pages/Success';
 
 import './App.css'
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/concerts" element={<Concerts />} />
           <Route path="/concert/:id" element={<ConcertDetail />} />
           <Route path="/tickets" element={<Tickets />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/success" element={<Success />} />
           <Route path="/ticket-return-success" element={<Success />} />
           <Route path="*" element={<NotFound />} />

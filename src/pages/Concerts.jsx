@@ -1,8 +1,9 @@
-// Concerts.jsx
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import {db} from '../firebase/firebase';
 import Concert from '../components/Concert'
+
+import Navigation from '../components/Navigation/Navigation'
 
 function Concerts() {
   const [todos, setTodos] = useState();
@@ -24,6 +25,7 @@ function Concerts() {
 
   return (
     <div>
+      <Navigation/>
       <h2 className='text-red-500'>Concerts Page</h2>
       {todos && todos.map((concert) => (
         <Concert key={concert.id} concert={concert} />

@@ -14,7 +14,6 @@ const Tickets = () => {
     try {
       const { concertID, ticketID, firstName, lastName } = formData;
 
-      // Получаем документ концерта
       const concertDoc = await getDoc(doc(db, 'concerts', concertID));
 
       if (!concertDoc.exists()) {
@@ -22,7 +21,6 @@ const Tickets = () => {
         return;
       }
 
-      // Получаем билет из концерта
       const ticket = concertDoc.data().tickets.find(t => t.ticketID === ticketID);
 
       if (!ticket) {
@@ -30,26 +28,22 @@ const Tickets = () => {
         return;
       }
 
-      // Проверяем, что билет еще не был возвращен
       if (!ticket.purchased) {
         setError('This ticket has already been returned');
         return;
       }
 
-      // Проверяем соответствие имени и фамилии
       if (ticket.first_name !== firstName || ticket.last_name !== lastName) {
         setError('Invalid name or last name for this ticket');
         return;
       }
 
-      // Обновляем билет в концерте
       const updatedTickets = concertDoc.data().tickets.map(t =>
         t.ticketID === ticketID ? { ...t, purchased: false, first_name: '', last_name: '' } : t
       );
 
       await updateDoc(doc(db, 'concerts', concertID), { tickets: updatedTickets });
 
-      // Перенаправляем пользователя
       navigate(`/ticket-return-success`);
     } catch (error) {
       console.error('Error returning ticket:', error);

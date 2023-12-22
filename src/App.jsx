@@ -19,6 +19,7 @@ function App() {
           <Route path="/concert/:id" element={<ConcertDetail />} />
           <Route path="/tickets" element={<Tickets />} />
           <Route path="/success" element={<Success />} />
+          <Route path="/ticket-return-success" element={<Success />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

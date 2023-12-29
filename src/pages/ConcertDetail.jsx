@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
+import Navigation from '../components/Navigation/Navigation';
 
 const ConcertDetail = () => {
   const { id } = useParams();
@@ -71,44 +72,42 @@ const ConcertDetail = () => {
   }
 
   return (
-    <div>
-      <h2>{concert.title}</h2>
-      <p>{concert.sub_title}</p>
-      <div>
-        <strong>Stars:</strong> {concert.stars.join(', ')}
+    <>
+      <Navigation />
+      <div className="mt-8 max-w-md mx-auto bg-black bg-opacity-75 text-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 border-white border rounded-lg">
+        <h2 className="text-2xl mb-2">{concert.title}</h2>
+        <p className="text-gray-300 mb-4">{concert.sub_title}</p>
+        <div className="text-gray-300 mb-4">
+          <strong>Stars:</strong> {concert.stars.join(', ')}
+        </div>
+        <form onSubmit={handleFormSubmit} className="text-white">
+          <label className="block mb-2">
+            First Name:
+            <input
+              type="text"
+              value={formData.firstName}
+              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+              className="w-full p-2 border border-white bg-black bg-opacity-50 focus:outline-none focus:border-teal-500"
+            />
+          </label>
+          <label className="block mb-2">
+            Last Name:
+            <input
+              type="text"
+              value={formData.lastName}
+              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+              className="w-full p-2 border border-white bg-black bg-opacity-50 focus:outline-none focus:border-teal-500"
+            />
+          </label>
+          <button
+            type="submit"
+            className="mt-6 bg-teal-500 text-white px-6 py-3 rounded transition-all duration-300 hover:bg-white hover:text-black"
+          >
+            Order Ticket
+          </button>
+        </form>
       </div>
-      <div>
-        <strong>Tickets:</strong>
-        <ul>
-          {concert.tickets.map((ticket, index) => (
-            <li key={index}>
-              Ticket ID: {ticket.ticketID}, Purchased: {ticket.purchased ? 'Yes' : 'No'}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <form onSubmit={handleFormSubmit}>
-        <label>
-          First Name:
-          <input
-            type="text"
-            value={formData.firstName}
-            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-          />
-        </label>
-        <br />
-        <label>
-          Last Name:
-          <input
-            type="text"
-            value={formData.lastName}
-            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-          />
-        </label>
-        <br />
-        <button type="submit">Order Ticket</button>
-      </form>
-    </div>
+    </>
   );
 };
 

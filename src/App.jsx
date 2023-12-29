@@ -9,6 +9,7 @@ import Success from './pages/Success';
 
 import './App.css'
 import Contact from './pages/Contact';
+import SuccessReturn from './pages/SuccessReturn';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/tickets" element={<Tickets />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/success" element={<Success />} />
-          <Route path="/ticket-return-success" element={<Success />} />
+          <Route path="/ticket-return-success" element={<SuccessReturn />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

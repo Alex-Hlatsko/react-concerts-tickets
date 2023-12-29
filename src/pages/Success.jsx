@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import jsPDF from 'jspdf';
+import Navigation from '../components/Navigation/Navigation';
 
 const Success = () => {
   const location = useLocation();
@@ -32,13 +34,19 @@ const Success = () => {
   }, [concertId, ticketId, firstName, lastName]);
 
   return (
-    <div>
-      <h2>Success! Your Ticket Details:</h2>
-      <p>Concert ID: {concertId}</p>
-      <p>Ticket ID: {ticketId}</p>
-      <p>First Name: {firstName}</p>
-      <p>Last Name: {lastName}</p>
-    </div>
+    <>
+      <Navigation />
+      <div className="mt-8 max-w-md mx-auto bg-black bg-opacity-75 text-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 border-white border rounded-lg">
+        <h2 className="text-2xl mb-4">Success! Your Ticket Details:</h2>
+        <p>Concert ID: {concertId}</p>
+        <p>Ticket ID: {ticketId}</p>
+        <p>First Name: {firstName}</p>
+        <p>Last Name: {lastName}</p>
+        <Link to="/concerts" className="mt-6 bg-teal-500 text-white px-6 py-3 rounded mt-4 inline-block">
+          Back to Concerts
+        </Link>
+      </div>
+    </>
   );
 };
 

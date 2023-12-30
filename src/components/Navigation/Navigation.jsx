@@ -12,7 +12,9 @@ const Navigation = () => {
   return (
     <>
       <nav className='flex justify-between items-center px-12 py-8'>
-        <div className="logo">Hi</div>
+        <div className="logo">
+          <a href="/"><img src="./src/assets/logo.svg" alt="logo" /></a>
+        </div>
         <div className={`menu ${menuActive ? 'active' : ''}`}>
           <NavLink className="menu_item mx-4" to="/">Home</NavLink>
           <NavLink className="menu_item mx-4" to="/concerts">Concerts</NavLink>
